@@ -7,7 +7,7 @@ import { withAuth } from '../lib/AuthProvider';
 // ...rest --> take all remaining properties on props and 
 // collect them inside rest argument
 
-function PrivateRoute({component: Component, isLoggedin, user, isLoading, ...rest }){
+function PublicRoute({component: Component, isLoggedin, user, isLoading, ...rest }){
 
     if(isLoading){
         return <h1>Loading...</h1>
@@ -17,11 +17,11 @@ function PrivateRoute({component: Component, isLoggedin, user, isLoading, ...res
             <Route 
                 {...rest}
                 render={props =>
-                    isLoggedin ? <Component {...props} /> : <Redirect to="/login"/>
+                    !isLoggedin ? <Component {...props} /> : <Redirect to="/activities"/>
                 }
             />
         );
     }
 }
 
-export default withAuth(PrivateRoute);
+export default withAuth(PublicRoute);
