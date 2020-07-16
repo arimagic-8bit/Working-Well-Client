@@ -1,68 +1,99 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Working Well
 
-## Available Scripts
+### Description
 
-In the project directory, you can run:
+Working Well is a responsive web app created to help people stay focused on their tasks or activities. To manage the working and rest time I will use the [Pomodoro technique]([https://es.wikipedia.org/wiki/T%C3%A9cnica_Pomodoro](https://es.wikipedia.org/wiki/Técnica_Pomodoro)). 
 
-### `npm start`
+### How to use it?
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Back-end**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+```js
+$ git clone https://github.com/arimagic-8bit/Working-Well.git
+$ npm i
+$ npm run start:dev
+```
 
-### `npm test`
+**Front-end**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### User stories
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+**Signup**: As an anon I can sign up in the platform so that I can start using the app.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Login**: As a user I can login to the platform so that I can start using the app.
 
-### `npm run eject`
+**Logout**: As a user I can logout from the platform so no one else can use it.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**Set task/activity**: As a user I can create a task or activity I want to focus on and set my working and rest time.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**Edit activity**: As a user I can edit a task or activity before starting working on it
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Delete activity**: As a user I can delete an activity before starting working on it
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Backlog
 
-## Learn More
+- Add relaxing music when doing the task/activity.
+- Add different time managing techniques that the user can choose. 
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Client/Frontend
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### React Router Routes
 
-### Code Splitting
+`<Route>` = allows anyone to see the page.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+`<PublicRoute>` = allows unauthenticated users to see the page.
 
-### Analyzing the Bundle Size
+`<PrivateRoute>` = allows only authenticated users to see the page.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+|    Path     |  Component  |    Permissions    |                Description                 |
+| :---------: | :---------: | :---------------: | :----------------------------------------: |
+|     `/`     | SplashPage  |    `<Route/>`     |      Home page with info about he app      |
+|  `/signup`  | SignupPage  | `<PublicRoute/>`  |                Signup form                 |
+|  `/login`   |  LoginPage  | `<PublicRoute/>`  |                 Login form                 |
+| `/settings` | SettingPage | `<PrivateRoute/>` |  Setup activities, working and rest time   |
+|  `/timer`   |  TimerPage  | `<PrivateRoute/>` | Shows a counter for each activity or break |
 
-### Making a Progressive Web App
+## Server / Backend
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### Models
 
-### Advanced Configuration
+User model
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+```javascript
+{
+  username: {type: String, required: true, unique: true},
+  password: {type: String, required: true, unique: true}
+}
+```
 
-### Deployment
+Activities model
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+```javascript
+{
+   title: {type: String, required: true},
+   completion: {type: Number, required: true},
+   rest:{type: Number, required: true}
+}  
+```
 
-### `npm run build` fails to minify
+### API Endpoints
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+| HTTP Method |            URL             |        Request body         | Status | Error |                Description                |
+| :---------: | :------------------------: | :-------------------------: | :----: | ----- | :---------------------------------------: |
+|   `POST`    |       `/auth/signup`       |   `{username, password}`    |  201   |       | Checks if info exist and saves user to DB |
+|   `POST`    |       `/auth/login`        |   `{username, password}`    |  200   |       | Checks if info exist and saves user to DB |
+|    `GET`    |       `/auth/logout`       |                             |  204   |       | Logs out the user and destroy the session |
+|    `GET`    |           `/me`            |                             |  200   |       |          Gets current user info           |
+|   `POST`    |      `/api/activity`       | `{title, completion, rest}` |  201   | 500   |    Creates an activity and saves in DB    |
+|    `GET`    |      `/api/activity`       |                             |  200   | 500   |         Shows all the activities          |
+|    `PUT`    |    `/api/activity/:id`     | `{title, completion, rest}` |  200   | 500   |          Edits and activity info          |
+|   `POST`    | `/api/activity/:id/delete` |                             |  200   | 500   |       Deletes one activity from DB        |
+|   `POST`    |     `/api/activities`      |                             |  200   | 500   |      Deletes all activities from DB       |
+
+## Links
+
+**Wireframes**
+
+[Here](https://www.figma.com/file/F8bDlSbVS2Avq2Ol5W1L3Q/Work-Well?node-id=0%3A1) you can see the design I made on Figma to make this app.
