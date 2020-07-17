@@ -6,7 +6,7 @@ import Signup from './pages/SignupScreen';
 import Login from './pages/LoginScreen';
 
 import Activities from './pages/ActivityScreen';
-import Error from './pages/ErrorScreen'
+import ErrorPage from './pages/ErrorScreen'
 
 import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -23,7 +23,7 @@ class App extends Component {
 
           <PrivateRoute exact path="/activities" component={Activities}/>
 
-          <Route component={Error}/>
+          <Route component={ErrorPage}/>
         </Switch>
       </div>
     )

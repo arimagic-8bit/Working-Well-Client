@@ -15,6 +15,7 @@ const withAuth = (WrappedComponent) => {
             isLoading,
             loginError,
             signupError,
+            notTheSame,
             login,
             logout,
             signup,
@@ -26,6 +27,7 @@ const withAuth = (WrappedComponent) => {
                 isLoading={isLoading}
                 loginError={loginError}
                 signupError={signupError}
+                notTheSame={notTheSame}
                 login={login}
                 logout={logout}
                 signup={signup}
@@ -48,6 +50,7 @@ class AuthProvider extends React.Component {
     isLoading: true, // the auth is still loading?
     loginError: null,
     signupError: null,
+    notTheSame: null,
   };
 
   // when app and AuthProvider loads for first time
@@ -64,7 +67,14 @@ class AuthProvider extends React.Component {
       );
   }
 
-  signup = (username, password) => {
+  signup = (username, password, repeatPassword) => {
+    if(password !== repeatPassword){
+      
+      this.setState({notTheSame:
+      'Please, write the same password'})
+    }
+    else{
+
     authService
       .signup(username, password)
       .then((response) => {
@@ -77,6 +87,7 @@ class AuthProvider extends React.Component {
             "Sorry, there was a problem. Please, check the provided info and try again",
         });
       });
+    }
   };
 
   login = (username, password) => {
@@ -99,7 +110,7 @@ class AuthProvider extends React.Component {
   };
 
   render() {
-    const { isLoggedin, user, isLoading, loginError, signupError } = this.state;
+    const { isLoggedin, user, isLoading, loginError, signupError, notTheSame } = this.state;
     const { login, logout, signup } = this;
 
     return (
@@ -110,6 +121,7 @@ class AuthProvider extends React.Component {
           isLoading,
           loginError,
           signupError,
+          notTheSame,
           login,
           logout,
           signup,
