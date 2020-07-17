@@ -3,13 +3,11 @@ import waiting from '../images/pale-waiting.png'
 import multitask from '../images/clip-fatal-error.png'
 import { Link } from "react-router-dom";
 
-import './SplashScreen.css'
-
 import React from 'react'
 
 export default function SplashScreen() {
     return (
-        <div className='splash'>
+        <div className='page-container'>
             <header className='title-container'>
                 <h1 className='work-well'><span>W</span>ORK <span>W</span>ELL</h1>
                 <div className='btn-container'>

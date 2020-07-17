@@ -28,7 +28,7 @@ class SignupScreen extends Component {
         const {signupError,notTheSame} = this.props;
 
         return (
-            <div>
+            <div className='page-container'>
                 <div className='title-container'>
                     <h1 className='work-well'><span>W</span>ORK <span>W</span>ELL</h1>
                 </div>

@@ -59,8 +59,8 @@ class AuthProvider extends React.Component {
     authService
       .me()
       .then((response) => {
-        const user = response.data;
-        this.setState({ isLoggedin: true, isLoading: false, user });
+        
+        this.setState({ isLoggedin: true, isLoading: false, user:response });
       })
       .catch(() =>
         this.setState({ isLoggedin: false, user: null, isLoading: false })
@@ -78,8 +78,7 @@ class AuthProvider extends React.Component {
     authService
       .signup(username, password)
       .then((response) => {
-        const user = response.data;
-        this.setState({ isLoggedin: true, isLoading: false, user });
+        this.setState({ isLoggedin: true, isLoading: false, user:response });
       })
       .catch((err) => {
         this.setState({
@@ -94,8 +93,8 @@ class AuthProvider extends React.Component {
     authService
       .login(username, password)
       .then((response) => {
-        const user = response.data;
-        this.setState({ isLoggedin: true, isLoading: false, user });
+        
+        this.setState({ isLoggedin: true, isLoading: false, user:response });
       })
       .catch((err) => {
         this.setState({ loginError: "Incorrect username or password" });

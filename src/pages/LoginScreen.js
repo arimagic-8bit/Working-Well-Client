@@ -28,7 +28,7 @@ class LoginScreen extends Component {
         const {loginError} = this.props;
 
         return (
-            <div>
+            <div className='page-container'>
                 <div className='title-container'>
                     <h1 className='work-well'><span>W</span>ORK <span>W</span>ELL</h1>
                 </div>

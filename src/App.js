@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {Switch, Route} from "react-router-dom";
 
+import './App.css'
+
 import Splash from './pages/SplashScreen';
 import Signup from './pages/SignupScreen';
 import Login from './pages/LoginScreen';
