@@ -84,7 +84,7 @@ class AuthProvider extends React.Component {
       .catch((err) => {
         this.setState({
           signupError:
-            "Sorry, there was a problem. Please, check the provided info and try again",
+            "Sorry, there was a problem. Please, check the provided info and try again"
         });
       });
     }
