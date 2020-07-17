@@ -1,19 +1,34 @@
 import React, { Component } from 'react';
 
-import {withAuth} from '../lib/AuthProvider';
+import {actCons} from '../lib/ActivityProvider';
 
 
 class ActivityScreen extends Component {
 
     state = {
-        activity: '',
-        allActivities:[],
+        title: '',
+        allTitles: []
+    }
+
+    handleChange = event => {
+        const {name, value} = event.target;
+        this.setState({[name]:value})
+    }
+
+    handleSubmit = event => {
+        event.preventDefault();
+
+        const {title} = this.state;
+        const newArr = this.state.allTitles.concat(title);
+
+        //this.props.getTitle(title);
+        this.setState({allTitles:newArr});
     }
 
     render() {
 
-        const {activity} = this.state;
-
+        const {title} = this.state;
+        
         return (
             <div className='page-container'>
                 <div className='title-container'>
@@ -22,11 +37,15 @@ class ActivityScreen extends Component {
                 <div>
                     <p>First, let's start defining your <span className='bold'>task or activity</span></p>
                     <p>You can add as many things as you need</p>
-                    <form>
+
+                    
+
+                    <form onSubmit={this.handleSubmit}>
                         <input type='text' 
                             placeholder='What do you want to do?'
-                            name='activity'
-                            value={activity}
+                            name='title'
+                            value={title}
+                            onChange={this.handleChange}
                             />
                         <button type='submit'>+</button>
                     </form>
@@ -37,4 +56,4 @@ class ActivityScreen extends Component {
     }
 }
 
-export default withAuth(ActivityScreen)
+export default actCons(ActivityScreen)
