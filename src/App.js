@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {Switch, Route} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Splash from './pages/SplashScreen';
+import Signup from './pages/SignupScreen';
+import Login from './pages/LoginScreen';
+
+import Activities from './pages/ActivityScreen';
+import ErrorPage from './pages/ErrorScreen'
+
+import PublicRoute from './components/PublicRoute';
+import PrivateRoute from './components/PrivateRoute';
+
+class App extends Component {
+
+  render(){
+    return(
+      <div className='App'>
+        <Switch>
+          <PublicRoute exact path="/" component={Splash}/>
+          <PublicRoute exact path="/signup" component={Signup}/>
+          <PublicRoute exact path="/login" component={Login}/>
+
+          <PrivateRoute exact path="/activities" component={Activities}/>
+
+          <Route component={ErrorPage}/>
+        </Switch>
+      </div>
+    )
+  }
 }
 
 export default App;
