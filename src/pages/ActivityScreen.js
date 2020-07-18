@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
 import {actCons} from '../lib/ActivityProvider';
+import {Link} from 'react-router-dom';
 
 
 class ActivityScreen extends Component {
 
     state = {
         title: '',
-        allTitles: []
     }
 
     handleChange = event => {
@@ -19,15 +19,15 @@ class ActivityScreen extends Component {
         event.preventDefault();
 
         const {title} = this.state;
-        const newArr = this.state.allTitles.concat(title);
 
-        //this.props.getTitle(title);
-        this.setState({allTitles:newArr});
+        this.props.getTitle(title);
+        this.setState({title:''})
     }
 
     render() {
 
         const {title} = this.state;
+        const {allTitle}= this.props;
         
         return (
             <div className='page-container'>
@@ -38,7 +38,15 @@ class ActivityScreen extends Component {
                     <p>First, let's start defining your <span className='bold'>task or activity</span></p>
                     <p>You can add as many things as you need</p>
 
-                    
+                    {
+                        allTitle.map(title => {
+                            return(
+                                <div>
+                                    <p>{title}</p>
+                                </div>
+                            )
+                        })
+                    }
 
                     <form onSubmit={this.handleSubmit}>
                         <input type='text' 
@@ -50,7 +58,7 @@ class ActivityScreen extends Component {
                         <button type='submit'>+</button>
                     </form>
                 </div>
-                
+                <Link to={'/completion'}>➜</Link>
             </div>
         )
     }

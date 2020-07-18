@@ -3,28 +3,36 @@ import activityService from "./activityService";
 const { Consumer, Provider } = React.createContext();
 
 
-
-// --> HOC to create Consumer <-- //
-
-function actCons(WrappedComponent){
-  return function(props) {
+const actCons = (WrappedComponent) => {
+  return class extends React.Component {
+    render() {
       return (
         <Consumer>
-          {(valueFromProvider) => (
+          {({
+            activities,
+            activity,
+            allTitle,
+            allCompletion,
+            allRest,
+            getTitle,
+            createActivity,
+          }) => {
+            return (
               <WrappedComponent
-                {...props}
-                activities={valueFromProvider.activities}
-                activity={valueFromProvider.activity}
-                title={valueFromProvider.title}
-                completion={valueFromProvider.completion}
-                rest={valueFromProvider.rest}
-                getTitle={valueFromProvider.getTitle}
-                createActivity={valueFromProvider.createActivity}
+                activities={activities}
+                activity={activity}
+                allTitle={allTitle}
+                allCompletion={allCompletion}
+                allRest={allRest}
+                getTitle={getTitle}
+                createActivity={createActivity}
+                {...this.props}
               />
-            )
-          }
+            );
+          }}
         </Consumer>
       );
+    }
   };
 };
 
@@ -34,30 +42,30 @@ class ActivityProvider extends React.Component {
   state = {
     activities: [],
     activity: null,
-    title: [],
-    completion: [],
-    rest: [],
+    allTitle: [],
+    allCompletion: [],
+    allRest: [],
   };
 
   // GET INFO FROM PAGES
 
   getTitle = (title) => {
-    const arrTitle = this.state.title.concat(title);
-    this.setState({ title: arrTitle });
+    const arrTitle = this.state.allTitle.concat(title);
+    this.setState({ allTitle: arrTitle });
     console.log(this.state.title);
   };
 
   // API CALLS
 
   createActivity = () => {
-    const { title, completion, rest } = this.state;
+    // const { title, completion, rest } = this.state;
 
-    activityService
-      .createActivity(title, completion, rest)
-      .then((response) => {
-        this.setState({ activity: response });
-      })
-      .catch((err) => console.log(err));
+    // activityService
+    //   .createActivity(title, completion, rest)
+    //   .then((response) => {
+    //     this.setState({ activity: response });
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   getAll = () => {
@@ -70,16 +78,16 @@ class ActivityProvider extends React.Component {
   }
 
   render() {
-    const {activities,  activity, title, completion, rest } = this.state;
+    const {activities,  activity, allTitle, allCompletion, allRest } = this.state;
     const { getTitle, createActivity } = this;
 
     return (
       <Provider value={{
           activities,
           activity,
-          title,
-          completion,
-          rest,
+          allTitle,
+          allCompletion,
+          allRest,
           getTitle,
           createActivity,
         }}
