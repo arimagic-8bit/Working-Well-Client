@@ -9,7 +9,8 @@ import Login from './pages/LoginScreen';
 
 import Activities from './pages/ActivityScreen';
 import ErrorPage from './pages/ErrorScreen';
-import Completion from './pages/CompletionScreen';
+import Rest from './pages/RestScreen';
+import Break from './pages/LargeBreakScreen'
 
 import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -25,7 +26,8 @@ class App extends Component {
           <PublicRoute exact path="/login" component={Login}/>
 
           <PrivateRoute exact path="/activities" component={Activities}/>
-          <PrivateRoute exact path="/completion" component={Completion} />
+          <PrivateRoute exact path="/rest" component={Rest} />
+          <PrivateRoute exact path="/break" component={Break} />
 
           <Route component={ErrorPage}/>
         </Switch>

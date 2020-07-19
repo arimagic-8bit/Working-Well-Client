@@ -1,105 +1,69 @@
-// import React from "react";
-// import activityService from "./activityService";
-// const { Consumer, Provider } = React.createContext();
+import React from "react";
+const { Consumer, Provider } = React.createContext();
 
+// --> HOC to create Consumer <-- //
 
-// const actCons = (WrappedComponent) => {
-//   return class extends React.Component {
-//     render() {
-//       return (
-//         <Consumer>
-//           {({
-//             activities,
-//             activity,
-//             allTitle,
-//             allCompletion,
-//             allRest,
-//             getTitle,
-//             createActivity,
-//           }) => {
-//             return (
-//               <WrappedComponent
-//                 activities={activities}
-//                 activity={activity}
-//                 allTitle={allTitle}
-//                 allCompletion={allCompletion}
-//                 allRest={allRest}
-//                 getTitle={getTitle}
-//                 createActivity={createActivity}
-//                 {...this.props}
-//               />
-//             );
-//           }}
-//         </Consumer>
-//       );
-//     }
-//   };
-// };
+const actConsum = (WrappedComponent) => {
+  return class extends React.Component {
+    render() {
+      return (
+        <Consumer>
+          {({
+            rest,
+            largeBreak,
+            setRest,
+            setBreak
+          }) => {
+            return (
+              <WrappedComponent
+                rest={rest}
+                largeBreak={largeBreak}
+                setRest={setRest}
+                setBreak={setBreak}
+                {...this.props}
+              />
+            );
+          }}
+        </Consumer>
+      );
+    }
+  };
+};
 
-// // --> Provider <-- //
+// --> Provider <-- //
 
-// class ActivityProvider extends React.Component {
-//   state = {
-//     activities: [],
-//     activity: null,
-//     title: '',
-//     completion: "00:00",
-//     rest: "00:00",
-//   };
+class ActProvider extends React.Component {
+  state = {
+    rest: '',
+    largeBreak:''
+  };
 
-//   // GET INFO FROM PAGES
+  setRest = (rest) => {
+      this.setState({rest:rest});
+  };
 
-//   getTitle = (oneTitle) => {
-//     this.setState({title:oneTitle})
-//     this.createActivity();
-//   };
+  setBreak = (largeBreak) => {
+      this.setState({largeBreak:largeBreak});
+  };
 
-//   // API CALLS
+  render() {
+    const { rest, largeBreak} = this.state;
+    const {setRest, setBreak} = this;
 
-//   // getOne = (id) => {
+    return (
+      <Provider
+        value={{
+            rest,
+            largeBreak,
+            setRest,
+            setBreak
+          
+        }}
+      >
+        {this.props.children}
+      </Provider>
+    );
+  }
+}
 
-//   // }
-
-//   createActivity = () => {
-//     const {title, completion, rest} = this.state;
-//     console.log(title, completion, rest)
-//     activityService
-//       .createActivity(title, completion, rest)
-//       .then((response) => {
-//         console.log(response)
-//         //this.getAll();
-//       })
-//       .catch((err) => console.log(err));
-//   };
-
-//   getAll = () => {
-//       activityService
-//       .showAll()
-//       .then((response) => {
-//           this.setState({activities: response})
-//       })
-//       .catch((err) => console.log(err))
-//   }
-
-//   render() {
-//     const {activities,  activity, allTitle, allCompletion, allRest } = this.state;
-//     const { getTitle, createActivity } = this;
-
-//     return (
-//       <Provider value={{
-//           activities,
-//           activity,
-//           allTitle,
-//           allCompletion,
-//           allRest,
-//           getTitle,
-//           createActivity,
-//         }}
-//       >
-//         {this.props.children}
-//       </Provider>
-//     );
-//   }
-// }
-
-// export { actCons, ActivityProvider };
+export { actConsum, ActProvider };

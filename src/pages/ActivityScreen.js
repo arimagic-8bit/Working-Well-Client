@@ -9,8 +9,9 @@ class ActivityScreen extends Component {
     state = {
         title: '',
         show: false,
-        allActivities: []
+        allActivities: [],
     }
+
 
     handleChange = event => {
         const {name, value} = event.target;
@@ -26,17 +27,16 @@ class ActivityScreen extends Component {
         this.setState({show:false, title: ''});
         activityService.showAll()
         .then((activities) => {
-            console.log(activities)
             this.setState({allActivities:activities});
         })
         .catch((err) => {
             console.log(err);
-        })
+        });
     }
 
     render() {
 
-        const {title, show, allActivities} = this.state;
+        const {title, show, allActivities, totalWorkingTime} = this.state;
         
         return (
             <div className='page-container'>
@@ -74,7 +74,7 @@ class ActivityScreen extends Component {
                         handleClose={this.handleClose}
                     />
                 </div>
-                <Link to={'/completion'}>➜</Link>
+                <Link to={'/rest'}>➜</Link>
             </div>
         )
     }
