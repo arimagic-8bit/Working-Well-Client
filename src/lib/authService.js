@@ -13,6 +13,7 @@ class Auth {
   // deconstruct response.data to {data}
 
   signup({ username, password }) {
+    console.log(username, password)
     return this.auth
       .post("/signup", { username, password })
       .then(({ data }) => data);

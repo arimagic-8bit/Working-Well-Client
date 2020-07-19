@@ -1,33 +1,42 @@
 import React, { Component } from 'react';
 
-import {actCons} from '../lib/ActivityProvider';
 import {Link} from 'react-router-dom';
-
+import Modal from './../components/Modal';
+import activityService from '../lib/activityService';
 
 class ActivityScreen extends Component {
 
     state = {
         title: '',
+        show: false,
+        allActivities: []
     }
 
     handleChange = event => {
         const {name, value} = event.target;
-        this.setState({[name]:value})
+        this.setState({[name]:value});
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
+    handleShow = (e) => {
+        e.preventDefault()
+        this.setState({show:true});
+    }
 
-        const {title} = this.state;
-
-        this.props.getTitle(title);
-        this.setState({title:''})
+    handleClose = () => {
+        this.setState({show:false, title: ''});
+        activityService.showAll()
+        .then((activities) => {
+            console.log(activities)
+            this.setState({allActivities:activities});
+        })
+        .catch((err) => {
+            console.log(err);
+        })
     }
 
     render() {
 
-        const {title} = this.state;
-        const {allTitle}= this.props;
+        const {title, show, allActivities} = this.state;
         
         return (
             <div className='page-container'>
@@ -39,10 +48,12 @@ class ActivityScreen extends Component {
                     <p>You can add as many things as you need</p>
 
                     {
-                        allTitle.map(title => {
+                        allActivities.map((activity, index) => {
                             return(
-                                <div>
-                                    <p>{title}</p>
+                                <div key={index}>
+                                    <p>{activity.title}</p>
+                                    <p>{activity.completion}</p>
+                                    
                                 </div>
                             )
                         })
@@ -55,8 +66,13 @@ class ActivityScreen extends Component {
                             value={title}
                             onChange={this.handleChange}
                             />
-                        <button type='submit'>+</button>
+                        <button onClick={this.handleShow} type='submit'>+</button>
                     </form>
+                    <Modal
+                        show={show}
+                        title={title}
+                        handleClose={this.handleClose}
+                    />
                 </div>
                 <Link to={'/completion'}>➜</Link>
             </div>
@@ -64,4 +80,4 @@ class ActivityScreen extends Component {
     }
 }
 
-export default actCons(ActivityScreen)
+export default ActivityScreen

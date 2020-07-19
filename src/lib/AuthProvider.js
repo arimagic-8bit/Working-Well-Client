@@ -74,7 +74,6 @@ class AuthProvider extends React.Component {
       'Please, write the same password'})
     }
     else{
-      console.log(username, password)
     authService
       .signup(username, password)
       .then((response) => {
