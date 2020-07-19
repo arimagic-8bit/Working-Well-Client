@@ -1,28 +1,30 @@
 import axios from "axios";
 
-const baseUrl = process.env.BASE_URL;
+const baseUrl = process.env.BASE_URL || "http://localhost:5000";
 
 class Activity {
     constructor() {
         this.activity = axios.create({
             baseURL: `${baseUrl}/api`,
+            withCredentials: true,
         });
     }
 
-    createActivity({
-        title,
-        completion,
-        rest
-    }) {
+    createActivity(title, completion) {
         return this.activity
             .post("/activity", {
                 title,
-                completion,
-                rest
+                completion
             })
             .then(({
                 data
             }) => data);
+    }
+
+    getOne(id){
+        return this.activity
+            .get(`/activity/${id}`)
+            .then(({data}) => data);
     }
 
     showAll() {
@@ -35,14 +37,12 @@ class Activity {
 
     editActivity(id, {
         title,
-        completion,
-        rest
+        completion
     }) {
         return this.activity
             .put(`/activity/${id}`, {
                 title,
-                completion,
-                rest
+                completion
             })
             .then(({
                 data
