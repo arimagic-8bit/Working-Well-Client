@@ -36,7 +36,7 @@ class ActivityScreen extends Component {
 
     render() {
 
-        const {title, show, allActivities, totalWorkingTime} = this.state;
+        const {title, show, allActivities} = this.state;
         
         return (
             <div className='page-container'>
@@ -52,8 +52,7 @@ class ActivityScreen extends Component {
                             return(
                                 <div key={index}>
                                     <p>{activity.title}</p>
-                                    <p>{activity.completion}</p>
-                                    
+                                    <p>{activity.completion} minutes</p>
                                 </div>
                             )
                         })

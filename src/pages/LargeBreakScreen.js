@@ -19,6 +19,7 @@ class LargeBreakScreen extends Component {
     handleShow = () => {
         const {largeBreak} = this.state;
         this.props.setBreak(largeBreak);
+        this.props.setAllActivities();
         this.setState({show:true});
     };
 
@@ -41,7 +42,7 @@ class LargeBreakScreen extends Component {
                     <p><span className='bold'>Hint:</span> For 25 min of working is better to rest 5 min</p>
                     <label>Rest time:</label>
                     <input
-                        placeholder='00:00'
+                        placeholder='0 minutes'
                         name='largeBreak'
                         value={largeBreak}
                         onChange={this.handleChange}
