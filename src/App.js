@@ -10,7 +10,10 @@ import Login from './pages/LoginScreen';
 import Activities from './pages/ActivityScreen';
 import ErrorPage from './pages/ErrorScreen';
 import Rest from './pages/RestScreen';
-import Break from './pages/LargeBreakScreen'
+import Break from './pages/LargeBreakScreen';
+import TimerWork from './components/TimerWork';
+import TimerRest from './components/TimerRest';
+import TimerFinal from './components/FinalTimer';
 
 import PublicRoute from './components/PublicRoute';
 import PrivateRoute from './components/PrivateRoute';
@@ -28,6 +31,9 @@ class App extends Component {
           <PrivateRoute exact path="/activities" component={Activities}/>
           <PrivateRoute exact path="/rest" component={Rest} />
           <PrivateRoute exact path="/break" component={Break} />
+          <PrivateRoute exact path="/timerWork" component={TimerWork} />
+          <PrivateRoute exact path="/timerRest" component={TimerRest} />
+          <PrivateRoute exact path="/timerFinal" component={TimerFinal} />
 
           <Route component={ErrorPage}/>
         </Switch>

@@ -5,7 +5,7 @@ import activityService from '../lib/activityService';
 class Modal extends Component {
     
     state = {
-        completion: '00:00',
+        completion: '00',
     }
     
     handleChange = (e) => {
@@ -33,7 +33,7 @@ class Modal extends Component {
         return (
             <div className={showOrHide}>
                 <form className='modal-main' onSubmit={this.handleSubmit}>
-                    <p className='text'>Now, <span className='bold'>add</span> a time you want to dedicate on it</p>
+                    <p className='text'>Now, <span className='bold'>add</span> how many minutes you want to dedicate on it</p>
                     <input
                     className='input-modal'
                     type='text'

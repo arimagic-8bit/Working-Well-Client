@@ -1,28 +1,14 @@
 import React, { Component } from 'react';
 
-import activityService from '../lib/activityService';
 import {Link} from 'react-router-dom';
 import {actConsum} from '../lib/ActivityProvider';
 
 
 class ModalComplete extends Component {
 
-    state = {
-        allActivities: [],
-    }
-
-    componentDidMount = () => {
-        activityService.showAll()
-        .then((activities) => {
-            this.setState({allActivities:activities});
-        })
-        .catch((err) => console.log(err));
-    };
-
     render() {
-        const {rest, largeBreak} = this.props;
+        const {rest, largeBreak, allActivities} = this.props;
         const showOrHide = this.props.show ? 'modal display-block' : 'modal display-none';
-        const {allActivities} = this.state;
 
 
         return (
@@ -43,7 +29,7 @@ class ModalComplete extends Component {
                     </div>
                     <p>Time between activities: {rest}</p>
                     <p>Final break: {largeBreak}</p>
-                    <Link>Go!</Link>
+                    <Link to={"/timerWork"} onClick={() => this.props.setAllActivities(allActivities)}>Go!</Link>
                 </div>
             </div>
         )
