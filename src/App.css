@@ -156,6 +156,10 @@ padding: 0 6rem;
     text-align: center;
 }
 
+.spaced-top{
+    margin-top: 1rem;
+}
+
 .activity-form{
     display: flex;
     flex-direction: column;
@@ -174,19 +178,52 @@ padding: 0 6rem;
 .activity-container{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     color:  rgba(0, 0, 0, 0.6);
-}
-
-.activity-container p{
-    margin-left: 2rem;
     border: 1px solid rgba(0, 0, 0, 0.37);
-
+    padding: 0.3rem 0;
 }
 
 .with-space{
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
+
+.link-container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forward{
+    margin-top: 2rem;
+    display: inline-block;
+    text-decoration: none;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #3E7BC4;
+    color: white;
+    border-radius: 100%;
+    padding: 0.5rem;
+    font-size: 20px;
+    text-align: left;
+}
+
+.forward:hover{
+    background-color: #2f5d96;
+}
+
+.forward:active{
+    background-color: #3EC8D0;
+}
+
+.center{
+    text-align: center;
+}
+
+.label{
+    color: rgba(0, 0, 0, 0.6); 
+    display: inline-block;
+    margin-top: 2rem;
+}
+
 
 /* MODAL */
 
@@ -206,7 +243,7 @@ padding: 0 6rem;
     top: 50%;
     left: 50%;
     width: 20rem;
-    height: 15rem;
+    height: 20rem;
     padding: 1.5rem 1rem;
     transform: translate(-50%, -50%);
     border-radius: 5px;
@@ -224,6 +261,21 @@ padding: 0 6rem;
       font-size: 18px;
       margin-bottom: 2rem;
       text-align: center;
+  }
+
+  .go{
+    background: #3EC8D0;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 0.5rem 1.5rem;
+  }
+
+  .spaced-bot{
+      display: flex;
+      justify-content: center;
   }
 
   

@@ -73,9 +73,9 @@ class ActivityScreen extends Component {
                         })
                     }
 
-                    <form className='activity-form' onSubmit={this.handleSubmit}>
+                    <form className='activity-form with-space' onSubmit={this.handleSubmit}>
                         <input 
-                            className='input with-space'
+                            className='input'
                             type='text' 
                             placeholder='What do you want to do?'
                             name='title'
@@ -84,16 +84,20 @@ class ActivityScreen extends Component {
                             />
                         <button className='more-btn' onClick={isButtonClickable} type='submit'>+</button>
                     </form>
+
+                    {
+                        errorMessage && <p className='error-noti'>You need to write some activity to continue</p>
+                    }
+
                     <Modal
                         show={show}
                         title={title}
                         handleClose={this.handleClose}
                     />
                 </div>
-                <Link onClick={isLinkClickable} to={'/rest'}>➜</Link>
-                {
-                    errorMessage && <p>You need to write some activity to continue</p>
-                }
+                <div className='link-container'>
+                    <Link className='forward' onClick={isLinkClickable} to={'/rest'}>➜</Link>
+                </div>
             </div>
         )
     }

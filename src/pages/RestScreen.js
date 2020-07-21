@@ -31,20 +31,25 @@ class RestScreen extends Component {
                 <div className='title-container'>
                     <h1 className='work-well'><span>W</span>ORK <span>W</span>ELL</h1>
                 </div>
-                <div>
-                    <p>Add a rest time to take between each task or activity</p>
-                    <p><span className='bold'>Hint:</span> For 25 min of working is better to rest 5 min</p>
-                    <label>Rest time:</label>
-                    <input
-                        placeholder='0 minutes'
-                        name='rest'
-                        value={rest}
-                        onChange={this.handleChange}
-                    />
-                    <Link onClick={isLinkClickable} to={'/break'}>➜</Link>
+                <div className='blue-container'>
+                    <p className='normal-text spaced'>Add a rest time to take between each task or activity</p>
+                    <p className='normal-text center'><span className='bold'>Hint:</span> For 25 min of working is better to rest 5 min</p>
+                   <div className='form'>
+                        <label className='label'>Rest time:</label>
+                        <input
+                            className='input'
+                            placeholder='0 minutes'
+                            name='rest'
+                            value={rest}
+                            onChange={this.handleChange}
+                        />
+                   </div>
                     {
-                        errorMessage && <p>You need to write some time to rest to continue</p>
+                        errorMessage && <p className='error-noti'>You need to write some time to rest to continue</p>
                     }
+                </div>
+                <div className='link-container'>
+                    <Link className='forward' onClick={isLinkClickable} to={'/break'}>➜</Link>
                 </div>
             </div>
         )
