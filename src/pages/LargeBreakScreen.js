@@ -8,6 +8,7 @@ class LargeBreakScreen extends Component {
     state = {
         largeBreak: '',
         show:false,
+        errorMessage: false,
     };
 
     
@@ -20,17 +21,23 @@ class LargeBreakScreen extends Component {
         const {largeBreak} = this.state;
         this.props.setBreak(largeBreak);
         this.props.setAllActivities();
-        this.setState({show:true});
+        this.setState({show:true, errorMessage:false});
     };
 
     handleClose = () => {
         this.setState({show:false, title: ''});
     };
 
+    preventClick = (e) => {
+        e.preventDefault();
+        this.setState({errorMessage: true});
+    }
+
 
     render() {
 
-        const {largeBreak, show} = this.state;
+        const {largeBreak, show,errorMessage} = this.state;
+        const isLinkClickable = largeBreak === '' ? this.preventClick : this.handleShow; 
 
         return (
             <div>
@@ -47,9 +54,12 @@ class LargeBreakScreen extends Component {
                         value={largeBreak}
                         onChange={this.handleChange}
                     />
-                    <button onClick={this.handleShow} >➜</button>
+                    <button onClick={isLinkClickable} >➜</button>
                     <ModalComplete 
                     show={show} />
+                    {
+                        errorMessage && <p>You need to write your large break time to continue</p>
+                    }
                 </div>
             </div>
         )

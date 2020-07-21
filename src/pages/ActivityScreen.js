@@ -10,8 +10,16 @@ class ActivityScreen extends Component {
         title: '',
         show: false,
         allActivities: [],
+        errorMessage: false,
     }
-
+    
+    componentDidMount = () => {
+        activityService.deleteAll()
+        .then((removed) => {
+            console.log(removed)
+        })
+        .catch((err) => console.log(err))
+    }
 
     handleChange = event => {
         const {name, value} = event.target;
@@ -20,52 +28,61 @@ class ActivityScreen extends Component {
 
     handleShow = (e) => {
         e.preventDefault()
-        this.setState({show:true});
+        this.setState({show:true, errorMessage:false});
     }
 
     handleClose = () => {
-        this.setState({show:false, title: ''});
         activityService.showAll()
         .then((activities) => {
-            this.setState({allActivities:activities});
+            console.log(activities)
+            this.setState({allActivities:activities, show:false, title: ''});
         })
         .catch((err) => {
             console.log(err);
         });
     }
 
+    preventClick = (e) => {
+        e.preventDefault();
+        this.setState({errorMessage: true});
+    }
+
     render() {
 
-        const {title, show, allActivities} = this.state;
+        const {title, show, allActivities, errorMessage} = this.state;
+        const isLinkClickable = (allActivities.length > 0) ? null : this.preventClick;
+        const isButtonClickable = (title === '') ? this.preventClick : this.handleShow;
         
         return (
             <div className='page-container'>
                 <div className='title-container'>
                     <h1 className='work-well'><span>W</span>ORK <span>W</span>ELL</h1>
                 </div>
-                <div>
-                    <p>First, let's start defining your <span className='bold'>task or activity</span></p>
-                    <p>You can add as many things as you need</p>
+                <div className='blue-container'>
+                    <p className='normal-text spaced'>First, let's start defining your <span className='bold'>task or activity</span></p>
+                    <p className='normal-text'>You can add as many things as you need</p>
 
                     {
-                        allActivities.map((activity, index) => {
+                       allActivities[0] && allActivities.map((activity, index) => {
                             return(
-                                <div key={index}>
+                                <div className='activity-container' key={index}>
                                     <p>{activity.title}</p>
-                                    <p>{activity.completion} minutes</p>
+                                    <p>{activity.completion} {activity.completion == 1 ? 'minute' : 'minutes'}</p>
                                 </div>
                             )
                         })
                     }
 
-                    <form onSubmit={this.handleSubmit}>
-                        <input type='text' 
+                    <form className='activity-form' onSubmit={this.handleSubmit}>
+                        <input 
+                            className='input with-space'
+                            type='text' 
                             placeholder='What do you want to do?'
                             name='title'
                             value={title}
                             onChange={this.handleChange}
                             />
-                        <button onClick={this.handleShow} type='submit'>+</button>
+                        <button className='more-btn' onClick={isButtonClickable} type='submit'>+</button>
                     </form>
                     <Modal
                         show={show}
@@ -73,7 +90,10 @@ class ActivityScreen extends Component {
                         handleClose={this.handleClose}
                     />
                 </div>
-                <Link to={'/rest'}>➜</Link>
+                <Link onClick={isLinkClickable} to={'/rest'}>➜</Link>
+                {
+                    errorMessage && <p>You need to write some activity to continue</p>
+                }
             </div>
         )
     }

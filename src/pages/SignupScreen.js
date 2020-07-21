@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {withAuth} from '../lib/AuthProvider';
+import {Link} from 'react-router-dom';
+
 
 class SignupScreen extends Component {
 
@@ -11,9 +13,7 @@ class SignupScreen extends Component {
 
     handleForm = event => {
         event.preventDefault();
-
         const {username, password,repeatPassword} = this.state;
-
         this.props.signup({username, password, repeatPassword});
     };
 
@@ -33,8 +33,9 @@ class SignupScreen extends Component {
                     <h1 className='work-well'><span>W</span>ORK <span>W</span>ELL</h1>
                 </div>
                 <div>
-                    <p>Glad to meet you!</p>
-                    <form onSubmit={this.handleForm}>
+                    <Link className='arrow-return' to={"/"}>⇠</Link>
+                    <p className='big-text'>Glad to meet you!</p>
+                    <form className='form' onSubmit={this.handleForm}>
                         <input className='input' 
                             type='text' 
                             name='username' 
@@ -64,7 +65,7 @@ class SignupScreen extends Component {
                             <p>{signupError || notTheSame}</p>
                         </div>
                         : null}
-                        <button type='submit'>Sign up</button>
+                        <button className='normal-btn' type='submit'>Sign up</button>
                     </form>
                 </div>
             </div>

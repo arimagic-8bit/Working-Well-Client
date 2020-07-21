@@ -1,15 +1,14 @@
 .page-container{
-    padding:3rem 2rem;
-    height: 100%;
+    padding:0 2rem;
 }
 
 .title-container{
     text-align: center;
-    margin-bottom: 5rem;
+    margin-bottom: 4rem;
 }
 
 .work-well{
-margin-bottom: 2rem;
+margin: 2rem 0;
 font-weight: bold;
 font-size: 40px;
 padding: 0 6rem;
@@ -72,7 +71,125 @@ padding: 0 6rem;
     font-weight: bold;
 }
 
+/* SIGNUP AND LOGIN PAGE */
+
+.arrow-return{
+    text-decoration: none;
+    font-size: 35px;
+    color: #3E7BC3;
+    cursor: pointer;
+}
+
+.arrow-return:hover, .arrow-return:active{
+    color: #3EC8D0;
+}
+
+.big-text{
+    text-align: center;
+    font-size: 25px;
+    margin: 2rem 0;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form label{
+    margin-bottom: 0.5rem;
+}
+
+.input{
+    margin-bottom: 1.5rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+}
+
+.error-noti{
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.5rem;
+    color: rgb(235, 53, 53);
+    font-weight: bold;
+}
+
+.normal-btn{
+    background-color: #3E7BC4;
+    box-shadow:
+    0 5.3px 10px rgba(0, 0, 0, 0.042),
+    0 42px 80px rgba(0, 0, 0, 0.07);
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    padding: 0.5rem 1rem;
+    color: white;
+    font-weight: bold;
+    font-size: 19px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.normal-btn:hover{
+    background-color: #2f5d96;
+}
+
+/* ACTIVITY SCREEN */
+
+.blue-container{
+    border: 1px solid #3EC8D0;
+    padding: 1.5rem;
+    height: 25rem;
+    font-size: 19px;
+    line-height: 1.5rem;
+}
+
+.normal-text{
+    margin-bottom: 1rem;
+}
+
+.spaced{
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.activity-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.more-btn{
+    align-self: flex-end;
+    border-radius: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.27);;
+    background-color: #F8F4F4;
+    color: #A29F9F;
+    font-size: 25px;
+}
+
+.activity-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color:  rgba(0, 0, 0, 0.6);
+}
+
+.activity-container p{
+    margin-left: 2rem;
+    border: 1px solid rgba(0, 0, 0, 0.37);
+
+}
+
+.with-space{
+    margin-top: 1rem;
+}
+
 /* MODAL */
+
 .modal {
     position: fixed;
     top: 0;
@@ -88,7 +205,9 @@ padding: 0 6rem;
     background: white;
     top: 50%;
     left: 50%;
-    padding: 3rem 4rem;
+    width: 20rem;
+    height: 15rem;
+    padding: 1.5rem 1rem;
     transform: translate(-50%, -50%);
     border-radius: 5px;
   }
@@ -107,21 +226,4 @@ padding: 0 6rem;
       text-align: center;
   }
 
-  .input-modal{
-      margin-bottom: 1rem;
-      padding: 0.2rem;
-      border: 1px solid rgba(0, 0, 0, 0.37);
-      color: rgba(0, 0, 0, 0.623);
-      font-size: 15px;
-  }
-
-  .btn-done{
-    background: #3E7BC4;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
-    border-color: #3E7BC4;
-    color: white; 
-    font-weight: bold;
-    font-size: 15px;
-    padding: 0.5rem 1rem;
-  }
+  

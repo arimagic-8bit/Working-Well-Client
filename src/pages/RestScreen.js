@@ -7,6 +7,7 @@ class RestScreen extends Component {
 
     state={
         rest: '',
+        errorMessage: false,
     };
 
     handleChange = event => {
@@ -14,10 +15,16 @@ class RestScreen extends Component {
         this.setState({[name]:value});
     };
 
+    preventClick = (e) => {
+        e.preventDefault();
+        this.setState({errorMessage: true});
+    }
+
 
     render() {
 
-        const {rest} = this.state;
+        const {rest, errorMessage} = this.state;
+        const isLinkClickable = rest === '' ? this.preventClick : () => this.props.setRest(rest);
 
         return (
             <div className='page-container'>
@@ -34,7 +41,10 @@ class RestScreen extends Component {
                         value={rest}
                         onChange={this.handleChange}
                     />
-                    <Link onClick={() => this.props.setRest(rest)} to={'/break'}>➜</Link>
+                    <Link onClick={isLinkClickable} to={'/break'}>➜</Link>
+                    {
+                        errorMessage && <p>You need to write some time to rest to continue</p>
+                    }
                 </div>
             </div>
         )

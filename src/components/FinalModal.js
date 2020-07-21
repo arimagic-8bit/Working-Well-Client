@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import {actConsum} from '../lib/ActivityProvider';
+import {withAuth} from '../lib/AuthProvider';
+import {Link} from 'react-router-dom';
 
 
 class FinalModal extends Component { 
 
     render() {
         const showOrHide = this.props.show ? 'modal display-block' : 'modal display-none';
+        const {logout} = this.props;
 
         return (
             
@@ -13,12 +15,12 @@ class FinalModal extends Component {
                 <div className='modal-main'>
                     <h2>YOU DID IT!</h2>
                     <p>You completed all of your tasks. What do you want to do now?</p>
-                    <button>Restart</button>
-                    <button>Log out</button>
+                    <Link to="/activities">Restart</Link>
+                    <button onClick={logout} >Log out</button>
                 </div>
             </div>
         )
     }
 }
 
-export default actConsum(FinalModal)
+export default withAuth(FinalModal)

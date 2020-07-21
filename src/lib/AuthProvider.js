@@ -92,8 +92,7 @@ class AuthProvider extends React.Component {
     authService
       .login(username, password)
       .then((response) => {
-        
-        this.setState({ isLoggedin: true, isLoading: false, user:response });
+        this.setState({ isLoggedin: true, isLoading: false, user:response});
       })
       .catch((err) => {
         this.setState({ loginError: "Incorrect username or password" });

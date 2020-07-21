@@ -92,11 +92,9 @@ class ActProvider extends React.Component {
   // TIMER LOGIC
 
   counterPlus = () => {
-    console.log('PRIMERO', this.state.index, this.state.allActivities.length)
     this.setState(({ index }) => ({
       index: index + 1,
     }));
-    console.log('SEGUNDO', this.state.index, this.state.allActivities.length)
   };
 
   setWorkTimer = () => {

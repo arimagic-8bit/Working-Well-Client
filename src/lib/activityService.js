@@ -59,7 +59,7 @@ class Activity {
 
     deleteAll() {
         return this.activity
-            .post('/activities')
+            .post('/activities/delete')
             .then(({
                 data
             }) => data);
