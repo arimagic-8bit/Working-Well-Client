@@ -25,7 +25,8 @@ const actConsum = (WrappedComponent) => {
             setRestTimer,
             setLargeTimer,
             length,
-            index
+            index,
+            activity
           }) => {
             return (
               <WrappedComponent
@@ -44,6 +45,7 @@ const actConsum = (WrappedComponent) => {
                 setLargeTimer={setLargeTimer}
                 length={length}
                 index={index}
+                activity={activity}
                 {...this.props}
               />
             );
@@ -66,7 +68,8 @@ class ActProvider extends React.Component {
     seconds: 0,
     isWorkTime: true,
     isTheEnd: false,
-    length: 0
+    length: 0,
+    activity: null
   };
 
   // KEEP ALL THE TIME INFO
@@ -92,19 +95,17 @@ class ActProvider extends React.Component {
   // TIMER LOGIC
 
   counterPlus = () => {
-    console.log('PRIMERO', this.state.index, this.state.allActivities.length)
     this.setState(({ index }) => ({
       index: index + 1,
     }));
-    console.log('SEGUNDO', this.state.index, this.state.allActivities.length)
   };
 
   setWorkTimer = () => {
     const { index, allActivities } = this.state;
     const activity = allActivities[index];
     const minutesAct = Number(activity.completion);
-    this.setState({ minutes: minutesAct, isWorkTime:true });
-
+    this.setState({ minutes: minutesAct, isWorkTime:true});
+    console.log(activity)
     this.myInterval = setInterval(() => {
       const { seconds, minutes } = this.state;
 
@@ -187,7 +188,8 @@ class ActProvider extends React.Component {
       isWorkTime,
       isTheEnd,
       length,
-      index
+      index,
+      activity
     } = this.state;
 
     const { setRest, setBreak, setAllActivities, setWorkTimer, setRestTimer, setLargeTimer } = this;
@@ -209,7 +211,8 @@ class ActProvider extends React.Component {
           setRestTimer,
           setLargeTimer,
           length,
-          index
+          index,
+          activity
         }}
       >
         {this.props.children}

@@ -57,3 +57,8 @@ html, body, #root, .App{
 body{
 	font-family: 'Roboto', sans-serif;
 }
+
+button {
+	outline: 0;
+	
+  }

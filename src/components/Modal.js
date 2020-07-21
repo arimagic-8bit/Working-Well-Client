@@ -5,7 +5,7 @@ import activityService from '../lib/activityService';
 class Modal extends Component {
     
     state = {
-        completion: '00',
+        completion: '',
     }
     
     handleChange = (e) => {
@@ -24,6 +24,7 @@ class Modal extends Component {
         })
         .catch((err) => console.log(err))
         this.props.handleClose();
+        this.setState({completion:''})
     }
 
     render() {
@@ -32,17 +33,20 @@ class Modal extends Component {
 
         return (
             <div className={showOrHide}>
-                <form className='modal-main' onSubmit={this.handleSubmit}>
-                    <p className='text'>Now, <span className='bold'>add</span> how many minutes you want to dedicate on it</p>
-                    <input
-                    className='input-modal'
-                    type='text'
-                    name='completion'
-                    value={completion}
-                    onChange={this.handleChange}
-                    />
-                    <button className='btn-done' type='submit'>Done</button>
-                </form>
+                <div className='modal-main' >
+                    <form className='form align' onSubmit={this.handleSubmit}>
+                        <p className='text'>Now, <span className='bold'>add</span> how many minutes you want to dedicate on it</p>
+                        <input
+                        className='input'
+                        placeholder='0 minutes'
+                        type='text'
+                        name='completion'
+                        value={completion}
+                        onChange={this.handleChange}
+                        />
+                        <button className='normal-btn' type='submit'>Done</button>
+                    </form> 
+                </div>
             </div>
         )
     }

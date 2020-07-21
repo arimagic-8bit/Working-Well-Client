@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {withAuth} from '../lib/AuthProvider';
+import {Link} from 'react-router-dom';
 
 
 class LoginScreen extends Component {
@@ -11,9 +12,7 @@ class LoginScreen extends Component {
 
     handleForm = event => {
         event.preventDefault();
-
         const {username, password} = this.state;
-
         this.props.login({username, password});
     };
 
@@ -33,8 +32,9 @@ class LoginScreen extends Component {
                     <h1 className='work-well'><span>W</span>ORK <span>W</span>ELL</h1>
                 </div>
                 <div>
-                    <p>Welcome back!</p>
-                    <form onSubmit={this.handleForm}>
+                    <Link className='arrow-return' to={"/"}>⇠</Link>
+                    <p className='big-text'>Welcome back!</p>
+                    <form className='form' onSubmit={this.handleForm}>
                         <input className='input' 
                             type='text' 
                             name='username' 
@@ -58,7 +58,7 @@ class LoginScreen extends Component {
                         : null
                         }
 
-                        <button type='submit'>Sign in</button>  
+                        <button className='normal-btn' type='submit'>Sign in</button>  
                     </form>
                 </div>
             </div>

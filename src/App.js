@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Switch, Route} from "react-router-dom";
+import {Switch} from "react-router-dom";
 
 import './App.css'
 
@@ -8,7 +8,6 @@ import Signup from './pages/SignupScreen';
 import Login from './pages/LoginScreen';
 
 import Activities from './pages/ActivityScreen';
-import ErrorPage from './pages/ErrorScreen';
 import Rest from './pages/RestScreen';
 import Break from './pages/LargeBreakScreen';
 import TimerWork from './components/TimerWork';
@@ -35,7 +34,6 @@ class App extends Component {
           <PrivateRoute exact path="/timerRest" component={TimerRest} />
           <PrivateRoute exact path="/timerFinal" component={TimerFinal} />
 
-          <Route component={ErrorPage}/>
         </Switch>
       </div>
     )
