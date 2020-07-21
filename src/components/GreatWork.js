@@ -6,11 +6,6 @@ import success from '../images/fogg-unsubscribed-1.png'
 
 class GreatWork extends Component { 
 
-    componentDidMount = () => {
-        const {length, index} = this.props;
-        console.log('VAMOS A VER',index, length)
-    }
-
     render() {
         const showOrHide = this.props.show ? 'modal display-block' : 'modal display-none';
         const {index, length}= this.props;

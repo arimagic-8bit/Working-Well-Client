@@ -25,7 +25,7 @@ class TimerRest extends Component {
 
     render() {
 
-        const {minutes, seconds, allActivities, index} = this.props;
+        const {minutes, seconds} = this.props;
         const {show} = this.state;
 
         return (

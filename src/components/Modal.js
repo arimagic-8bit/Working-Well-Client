@@ -34,7 +34,7 @@ class Modal extends Component {
         return (
             <div className={showOrHide}>
                 <div className='modal-main' >
-                    <form className='form' onSubmit={this.handleSubmit}>
+                    <form className='form align' onSubmit={this.handleSubmit}>
                         <p className='text'>Now, <span className='bold'>add</span> how many minutes you want to dedicate on it</p>
                         <input
                         className='input'

@@ -24,7 +24,7 @@ class TimerWork extends Component {
 
     render() {
 
-        const {minutes, seconds,length, index, allActivities} = this.props;
+        const {minutes, seconds,length, index} = this.props;
         const {show} = this.state;
 
         return (

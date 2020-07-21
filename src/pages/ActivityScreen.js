@@ -58,46 +58,48 @@ class ActivityScreen extends Component {
                 <div className='title-container'>
                     <h1 className='work-well'><span>W</span>ORK <span>W</span>ELL</h1>
                 </div>
-                <div className='blue-container'>
-                    <p className='normal-text spaced'>First, let's start defining your <span className='bold'>task or activity</span></p>
-                    <p className='normal-text'>You can add as many things as you need</p>
+                <div className='large-container'>
+                    <div className='blue-container'>
+                        <p className='normal-text spaced'>First, let's start defining your <span className='bold'>task or activity</span></p>
+                        <p className='normal-text center-web'>You can add as many things as you need</p>
 
-                    {
-                       allActivities[0] && allActivities.map((activity, index) => {
-                            return(
-                                <div className='activity-container' key={index}>
-                                    <p>{activity.title}</p>
-                                    <p>{activity.completion} {activity.completion == '1' ? 'minute' : 'minutes'}</p>
-                                </div>
-                            )
-                        })
-                    }
+                        {
+                        allActivities[0] && allActivities.map((activity, index) => {
+                                return(
+                                    <div className='activity-container' key={index}>
+                                        <p>{activity.title}</p>
+                                        <p>{activity.completion} {activity.completion === '1' ? 'minute' : 'minutes'}</p>
+                                    </div>
+                                )
+                            })
+                        }
 
-                    <form className='activity-form with-space' onSubmit={this.handleSubmit}>
-                        <input 
-                            className='input'
-                            type='text' 
-                            placeholder='What do you want to do?'
-                            name='title'
-                            value={title}
-                            onChange={this.handleChange}
-                            />
-                        <button className='more-btn' onClick={isButtonClickable} type='submit'>+</button>
-                    </form>
+                        <form className='activity-form with-space' onSubmit={this.handleSubmit}>
+                            <input 
+                                className='input'
+                                type='text' 
+                                placeholder='What do you want to do?'
+                                name='title'
+                                value={title}
+                                onChange={this.handleChange}
+                                />
+                            <button className='more-btn' onClick={isButtonClickable} type='submit'>+</button>
+                        </form>
 
-                    {
-                        errorMessage && <p className='error-noti'>You need to write some activity to continue</p>
-                    }
+                        {
+                            errorMessage && <p className='error-noti'>You need to write some activity to continue</p>
+                        }
 
-                    <Modal
-                        show={show}
-                        title={title}
-                        handleClose={() =>this.handleClose()}
-                    />
-                </div>
-                <div className='link-container'>
-                    <Link className='forward' onClick={isLinkClickable} to={'/rest'}>➜</Link>
-                </div>
+                        <Modal
+                            show={show}
+                            title={title}
+                            handleClose={() =>this.handleClose()}
+                        />
+                    </div>
+                    <div className='link-container'>
+                        <Link className='forward' onClick={isLinkClickable} to={'/rest'}>➜</Link>
+                    </div>
+                 </div>
             </div>
         )
     }
