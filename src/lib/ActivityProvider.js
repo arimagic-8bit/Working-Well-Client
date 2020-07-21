@@ -26,7 +26,7 @@ const actConsum = (WrappedComponent) => {
             setLargeTimer,
             length,
             index,
-            activity
+            activity,
           }) => {
             return (
               <WrappedComponent
@@ -69,7 +69,7 @@ class ActProvider extends React.Component {
     isWorkTime: true,
     isTheEnd: false,
     length: 0,
-    activity: null
+    activity: null,
   };
 
   // KEEP ALL THE TIME INFO
@@ -87,12 +87,16 @@ class ActProvider extends React.Component {
       .showAll()
       .then((activities) => {
         const lengthArray = activities.length;
-        this.setState({ allActivities: activities, length:lengthArray });
+        this.setState({ allActivities: activities, length: lengthArray });
       })
       .catch((err) => console.log(err));
   };
 
   // TIMER LOGIC
+
+
+  // Every time the setWorkTimer is called, at the end the index sums 1 and we can access to the next
+  // activity in the array
 
   counterPlus = () => {
     this.setState(({ index }) => ({
@@ -104,8 +108,8 @@ class ActProvider extends React.Component {
     const { index, allActivities } = this.state;
     const activity = allActivities[index];
     const minutesAct = Number(activity.completion);
-    this.setState({ minutes: minutesAct, isWorkTime:true});
-    console.log(activity)
+    this.setState({ minutes: minutesAct, isWorkTime: true });
+    console.log(activity);
     this.myInterval = setInterval(() => {
       const { seconds, minutes } = this.state;
 
@@ -128,7 +132,6 @@ class ActProvider extends React.Component {
   };
 
   setRestTimer = () => {
-
     const { rest } = this.state;
     this.setState({ isWorkTime: false, minutes: rest });
 
@@ -153,9 +156,14 @@ class ActProvider extends React.Component {
   };
 
   setLargeTimer = () => {
-    const {largeBreak} = this.state;
+    const { largeBreak } = this.state;
 
-    this.setState({minutes: largeBreak, isWorkTime: false, isRestTime: false, isTheEnd:true});
+    this.setState({
+      minutes: largeBreak,
+      isWorkTime: false,
+      isRestTime: false,
+      isTheEnd: true,
+    });
 
     this.myInterval = setInterval(() => {
       const { seconds, minutes } = this.state;
@@ -175,8 +183,7 @@ class ActProvider extends React.Component {
         }
       }
     }, 1000);
-  }
-
+  };
 
   render() {
     const {
@@ -189,10 +196,17 @@ class ActProvider extends React.Component {
       isTheEnd,
       length,
       index,
-      activity
+      activity,
     } = this.state;
 
-    const { setRest, setBreak, setAllActivities, setWorkTimer, setRestTimer, setLargeTimer } = this;
+    const {
+      setRest,
+      setBreak,
+      setAllActivities,
+      setWorkTimer,
+      setRestTimer,
+      setLargeTimer,
+    } = this;
 
     return (
       <Provider
@@ -212,7 +226,7 @@ class ActProvider extends React.Component {
           setLargeTimer,
           length,
           index,
-          activity
+          activity,
         }}
       >
         {this.props.children}

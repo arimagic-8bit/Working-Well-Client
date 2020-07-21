@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = process.env.BASE_URL || "http://localhost:5000"
+const baseUrl = process.env.BASE_URL || "http://localhost:5000";
 
 class Auth {
   constructor() {
@@ -13,7 +13,7 @@ class Auth {
   // deconstruct response.data to {data}
 
   signup({ username, password }) {
-    console.log(username, password)
+    console.log(username, password);
     return this.auth
       .post("/signup", { username, password })
       .then(({ data }) => data);
