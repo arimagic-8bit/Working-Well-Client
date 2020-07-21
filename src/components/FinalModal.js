@@ -13,10 +13,12 @@ class FinalModal extends Component {
             
             <div className={showOrHide}>
                 <div className='modal-main'>
-                    <h2>YOU DID IT!</h2>
-                    <p>You completed all of your tasks. What do you want to do now?</p>
-                    <Link to="/activities">Restart</Link>
-                    <button onClick={logout} >Log out</button>
+                    <p className='timer-title'>YOU DID IT!</p>
+                    <p className='normal-text center less-space'>You completed all of your tasks. What do you want to do now?</p>
+                    <div className='btn-cont'>
+                        <Link className='go' to="/activities">Restart</Link>
+                        <Link className='logout' onClick={logout}>Log out</Link>
+                    </div>
                 </div>
             </div>
         )

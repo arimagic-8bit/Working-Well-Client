@@ -21,14 +21,14 @@ class ModalComplete extends Component {
                             return (
                                 <div className='activity-container' key={index}>
                                     <p>{activity.title}</p>
-                                    <p>{activity.completion} {activity.completion == 1 ? 'minute' : 'minutes'}</p>
+                                    <p>{activity.completion} {activity.completion === '1' ? 'minute' : 'minutes'}</p>
                                 </div>
                             )
                         })
                     }
                     </div>
-                    <p className='normal-text center spaced-top'><span className='bold'>Time between activities:</span> {rest} {rest == 1 ? 'minute' : 'minutes'}</p>
-                    <p className='normal-text center'><span className='bold'>Final break:</span> {largeBreak} {largeBreak == 1 ? 'minute' : 'minutes'}</p>
+                    <p className='normal-text center spaced-top'><span className='bold'>Time between activities:</span> {rest} {rest === '1' ? 'minute' : 'minutes'}</p>
+                    <p className='normal-text center'><span className='bold'>Final break:</span> {largeBreak} {largeBreak === '1' ? 'minute' : 'minutes'}</p>
                     <div className='spaced-bot'>
                         <Link className='go' to={"/timerWork"} onClick={() => this.props.setAllActivities(allActivities)}>Go!</Link>
                     </div>

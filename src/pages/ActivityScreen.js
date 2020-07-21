@@ -67,7 +67,7 @@ class ActivityScreen extends Component {
                             return(
                                 <div className='activity-container' key={index}>
                                     <p>{activity.title}</p>
-                                    <p>{activity.completion} {activity.completion == 1 ? 'minute' : 'minutes'}</p>
+                                    <p>{activity.completion} {activity.completion == '1' ? 'minute' : 'minutes'}</p>
                                 </div>
                             )
                         })
@@ -92,7 +92,7 @@ class ActivityScreen extends Component {
                     <Modal
                         show={show}
                         title={title}
-                        handleClose={this.handleClose}
+                        handleClose={() =>this.handleClose()}
                     />
                 </div>
                 <div className='link-container'>
