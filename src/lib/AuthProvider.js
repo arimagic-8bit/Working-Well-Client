@@ -59,8 +59,7 @@ class AuthProvider extends React.Component {
     authService
       .me()
       .then((response) => {
-        
-        this.setState({ isLoggedin: true, isLoading: false, user:response });
+        this.setState({ isLoggedin: true, isLoading: false, user: response });
       })
       .catch(() =>
         this.setState({ isLoggedin: false, user: null, isLoading: false })
@@ -68,23 +67,20 @@ class AuthProvider extends React.Component {
   }
 
   signup = (username, password, repeatPassword) => {
-    if(password !== repeatPassword){
-      
-      this.setState({notTheSame:
-      'Please, write the same password'})
-    }
-    else{
-    authService
-      .signup(username, password)
-      .then((response) => {
-        this.setState({ isLoggedin: true, isLoading: false, user:response });
-      })
-      .catch((err) => {
-        this.setState({
-          signupError:
-            "Sorry, there was a problem. Please, check the provided info and try again"
+    if (password !== repeatPassword) {
+      this.setState({ notTheSame: "Please, write the same password" });
+    } else {
+      authService
+        .signup(username, password)
+        .then((response) => {
+          this.setState({ isLoggedin: true, isLoading: false, user: response });
+        })
+        .catch((err) => {
+          this.setState({
+            signupError:
+              "Sorry, there was a problem. Please, check the provided info and try again",
+          });
         });
-      });
     }
   };
 
@@ -92,7 +88,7 @@ class AuthProvider extends React.Component {
     authService
       .login(username, password)
       .then((response) => {
-        this.setState({ isLoggedin: true, isLoading: false, user:response});
+        this.setState({ isLoggedin: true, isLoading: false, user: response });
       })
       .catch((err) => {
         this.setState({ loginError: "Incorrect username or password" });
@@ -107,7 +103,14 @@ class AuthProvider extends React.Component {
   };
 
   render() {
-    const { isLoggedin, user, isLoading, loginError, signupError, notTheSame } = this.state;
+    const {
+      isLoggedin,
+      user,
+      isLoading,
+      loginError,
+      signupError,
+      notTheSame,
+    } = this.state;
     const { login, logout, signup } = this;
 
     return (
